@@ -4011,10 +4011,12 @@ AddCommand("skill", {"swordkill"}, "swordkills the user auto", {1, {"player", "m
             for i2 = 1, 5 do
                 if (lower(Option) == "manual") then
                     GetRoot().CFrame = GetRoot(v).CFrame * CFrameNew(0, -3, 0);
+                    game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                     Tool.Activate(Tool);
                     Tool.Activate(Tool);
                     wait();
                 else
+                    game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                     Tool.Activate(Tool);
                     firetouchinterest(Tool.Handle, GetRoot(v), 0);
                     wait();
@@ -4247,10 +4249,12 @@ AddCommand("loopskill", {"loopswordkill"}, "loopswordkills the user auto", {1, {
                 for i2 = 1, 5 do
                     if (lower(Option) == "manual") then
                         GetRoot().CFrame = GetRoot(v).CFrame * CFrameNew(0, -3, 0);
+                        game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                         Tool.Activate(Tool);
                         Tool.Activate(Tool);
                         wait();
                     else
+                        game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                         Tool.Activate(Tool);
                         firetouchinterest(Tool.Handle, GetRoot(v), 0);
                         wait();
