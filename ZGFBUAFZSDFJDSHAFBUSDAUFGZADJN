@@ -4003,6 +4003,9 @@ AddCommand("skill", {"swordkill"}, "swordkills the user auto", {1, {"player", "m
     local Tool = FindFirstChild(Character, "ClassicSword") or FindFirstChild(Backpack, "ClassicSword") or FindFirstChildOfClass(Backpack, "Tool") or FindFirstChildOfClass(Character, "Tool");
     Tool.Parent = Character
     local OldPos = GetRoot().CFrame
+    
+    game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0)
+    
     for i, v in next, Target do
         CThread(function()
             if (FindFirstChild(v.Character, "ForceField")) then
@@ -4011,7 +4014,6 @@ AddCommand("skill", {"swordkill"}, "swordkills the user auto", {1, {"player", "m
             for i2 = 1, 5 do
                 if (lower(Option) == "manual") then
                     GetRoot().CFrame = GetRoot(v).CFrame * CFrameNew(0, -3, 0);
-                    game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                     Tool.Activate(Tool);
                     Tool.Activate(Tool);
                     wait();
@@ -4240,7 +4242,8 @@ AddCommand("loopskill", {"loopswordkill"}, "loopswordkills the user auto", {1, {
     Tool.Parent = Character
     local OldPos = GetRoot().CFrame
 
-    while true do
+    while wait() do
+        game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0)
         for i, v in next, Target do
             CThread(function()
                 if (FindFirstChild(v.Character, "ForceField")) then
@@ -4249,12 +4252,10 @@ AddCommand("loopskill", {"loopswordkill"}, "loopswordkills the user auto", {1, {
                 for i2 = 1, 5 do
                     if (lower(Option) == "manual") then
                         GetRoot().CFrame = GetRoot(v).CFrame * CFrameNew(0, -3, 0);
-                        game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                         Tool.Activate(Tool);
                         Tool.Activate(Tool);
                         wait();
                     else
-                        game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                         Tool.Activate(Tool);
                         firetouchinterest(Tool.Handle, GetRoot(v), 0);
                         wait();
@@ -4268,7 +4269,6 @@ AddCommand("loopskill", {"loopswordkill"}, "loopswordkills the user auto", {1, {
                 end
             end)()
         end
-        wait(.0000000000001)
     end
 end)
 
