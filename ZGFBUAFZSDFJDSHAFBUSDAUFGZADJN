@@ -4018,7 +4018,6 @@ AddCommand("skill", {"swordkill"}, "swordkills the user auto", {1, {"player", "m
                     Tool.Activate(Tool);
                     wait();
                 else
-                    game.Players.LocalPlayer.Character.Sword.Grip = CFrame.new(0,1000,0);
                     Tool.Activate(Tool);
                     firetouchinterest(Tool.Handle, GetRoot(v), 0);
                     wait();
