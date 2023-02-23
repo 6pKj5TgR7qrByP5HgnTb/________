@@ -4005,6 +4005,7 @@ AddCommand("skill", {"swordkill"}, "swordkills the user auto", {1, {"player", "m
     local OldPos = GetRoot().CFrame
     
     game.Players.LocalPlayer.Character.Animate.toolnone.ToolNoneAnim.AnimationId = "0"
+    game.Players.LocalPlayer.Character.Sword.Grip.CFrame = CFrame.new(0,300,0)
     
     for i, v in next, Target do
         CThread(function()
@@ -4244,6 +4245,7 @@ AddCommand("loopskill", {"loopswordkill"}, "loopswordkills the user auto", {1, {
 
     while wait() do
         game.Players.LocalPlayer.Character.Animate.toolnone.ToolNoneAnim.AnimationId = "0"
+	game.Players.LocalPlayer.Character.Sword.Grip.CFrame = CFrame.new(0,300,0)
         for i, v in next, Target do
             CThread(function()
                 if (FindFirstChild(v.Character, "ForceField")) then
