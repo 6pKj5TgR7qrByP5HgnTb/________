@@ -4234,6 +4234,12 @@ AddCommand("fireproximityprompts", {"fpp"}, "fires all the proximity prompts", {
     return format("fired %d amount of proximityprompts", amount);
 end)
 
+AddCommand("tovoid", {"tv"}, "teleports localplayer to void", {}, function()
+    while wait() do
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9e9,9e9,9e9)
+    end    
+end)
+
 AddCommand("loopskill", {"loopswordkill"}, "loopswordkills the user auto", {1, {"player", "manual"}}, function(Caller, Args)
     local Target, Option = GetPlayer(Args[1]), Args[2] or ""
     local Backpack, Character = LocalPlayer.Backpack, GetCharacter();
