@@ -1036,7 +1036,7 @@ end)
 local GetRoot = function(Plr, Char)
     local LCharacter = GetCharacter();
     local Character = Char or GetCharacter(Plr);
-    return Plr and Character and (FindFirstChild(Character, "HumanoidRootPart") or FindFirstChild(Character, "Torso") or FindFirstChild(Character, "UpperTorso") or FindFirstChild(Character, "Right Arm") or FindFirstChild(Character, "Left Arm")) or LCharacter and (FindFirstChild(LCharacter, "HumanoidRootPart") or FindFirstChild(LCharacter, "Torso") or FindFirstChild(LCharacter, "UpperTorso") or FindFirstChild(Character, "Right Arm") or FindFirstChild(Character, "Left Arm"));
+    return Plr and Character and (FindFirstChild(Character, "HumanoidRootPart") or FindFirstChild(Character, "Torso") or FindFirstChild(Character, "UpperTorso") or FindFirstChild(Character, "Right Arm") or FindFirstChild(Character, "Left Arm") or FindFirstChild(Character, "Right Leg") or FindFirstChild(Character, "Left Leg")) or LCharacter and (FindFirstChild(LCharacter, "HumanoidRootPart") or FindFirstChild(LCharacter, "Torso") or FindFirstChild(LCharacter, "UpperTorso") or FindFirstChild(LCharacter, "Right Arm") or FindFirstChild(LCharacter, "Left Arm") or FindFirstChild(LCharacter, "Right Leg") or FindFirstChild(LCharacter, "Left Leg"));
 end
 
 local GetHumanoid = function(Plr, Char)
