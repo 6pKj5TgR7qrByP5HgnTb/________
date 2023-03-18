@@ -775,7 +775,7 @@ do
                     }
                 end
                 local Connections = tbl_concat(
-                    getconnections(GetPropertyChangedSignal(Instance_, SpoofedPropertiesForInstance and SpoofedPropertiesForInstance.Property or Index), true),
+                    -- getconnections(GetPropertyChangedSignal(Instance_, SpoofedPropertiesForInstance and SpoofedPropertiesForInstance.Property or Index), true),
                     -- getconnections(Instance_.Changed, true),
                     getconnections(game.ItemChanged, true)
                 )
@@ -1036,7 +1036,7 @@ end)
 local GetRoot = function(Plr, Char)
     local LCharacter = GetCharacter();
     local Character = Char or GetCharacter(Plr);
-    return Plr and Character and (FindFirstChild(Character, "HumanoidRootPart") or FindFirstChild(Character, "Torso") or FindFirstChild(Character, "UpperTorso") or FindFirstChild(Character, "Right Arm") or FindFirstChild(Character, "Left Arm") or FindFirstChild(Character, "Right Leg") or FindFirstChild(Character, "Left Leg")) or LCharacter and (FindFirstChild(LCharacter, "HumanoidRootPart") or FindFirstChild(LCharacter, "Torso") or FindFirstChild(LCharacter, "UpperTorso") or FindFirstChild(LCharacter, "Right Arm") or FindFirstChild(LCharacter, "Left Arm") or FindFirstChild(LCharacter, "Right Leg") or FindFirstChild(LCharacter, "Left Leg"));
+    return Plr and Character and (FindFirstChild(Character, "HumanoidRootPart") or FindFirstChild(Character, "Torso") or FindFirstChild(Character, "UpperTorso")) or LCharacter and (FindFirstChild(LCharacter, "HumanoidRootPart") or FindFirstChild(LCharacter, "Torso") or FindFirstChild(LCharacter, "UpperTorso"));
 end
 
 local GetHumanoid = function(Plr, Char)
@@ -4003,9 +4003,6 @@ AddCommand("skill", {"swordkill"}, "swordkills the user auto", {1, {"player", "m
     local Tool = FindFirstChild(Character, "ClassicSword") or FindFirstChild(Backpack, "ClassicSword") or FindFirstChildOfClass(Backpack, "Tool") or FindFirstChildOfClass(Character, "Tool");
     Tool.Parent = Character
     local OldPos = GetRoot().CFrame
-    
-    game.Players.LocalPlayer.Character.Animate.toolnone.ToolNoneAnim.AnimationId = "0"
-    
     for i, v in next, Target do
         CThread(function()
             if (FindFirstChild(v.Character, "ForceField")) then
@@ -4232,49 +4229,6 @@ AddCommand("fireproximityprompts", {"fpp"}, "fires all the proximity prompts", {
         end
     end
     return format("fired %d amount of proximityprompts", amount);
-end)
-
-AddCommand("tovoid", {"tv"}, "teleports localplayer to void", {}, function()
-    while wait() do
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(9e9,9e9,9e9)
-    end    
-end)
-
-AddCommand("loopskill", {"loop"}, "loopswordkills the user auto", {1, {"player", "manual"}}, function(Caller, Args)
-    local Target, Option = GetPlayer(Args[1]), Args[2] or ""
-    local Backpack, Character = LocalPlayer.Backpack, GetCharacter();
-    local Tool = FindFirstChild(Character, "ClassicSword") or FindFirstChild(Backpack, "ClassicSword") or FindFirstChildOfClass(Backpack, "Tool") or FindFirstChildOfClass(Character, "Tool");
-    Tool.Parent = Character
-    local OldPos = GetRoot().CFrame
-
-    while wait() do
-        game.Players.LocalPlayer.Character.Animate.toolnone.ToolNoneAnim.AnimationId = "0"
-        for i, v in next, Target do
-            CThread(function()
-                if (FindFirstChild(v.Character, "ForceField")) then
-                    repeat wait() until not FindFirstChild(v.Character, "ForceField");
-                end
-                for i2 = 1, 5 do
-                    if (lower(Option) == "manual") then
-                        GetRoot().CFrame = GetRoot(v).CFrame * CFrameNew(0, -3, 0);
-                        Tool.Activate(Tool);
-                        Tool.Activate(Tool);
-                        wait();
-                    else
-                        Tool.Activate(Tool);
-                        firetouchinterest(Tool.Handle, GetRoot(v), 0);
-                        wait();
-                        firetouchinterest(Tool.Handle, GetRoot(v), 1);
-                        wait();
-                    end
-                end
-                wait();
-                if (lower(Option) == "manual") then
-                    WaitForChild(LocalPlayer.Character, "HumanoidRootPart").CFrame = OldPos
-                end
-            end)()
-        end
-    end
 end)
 
 AddCommand("muteboombox", {}, "mutes a users boombox", {}, function(Caller, Args)
@@ -4630,6 +4584,7 @@ end)
 
 AddCommand("refresh", {"re"}, "refreshes your character", {3}, function(Caller)
     ReplaceCharacter();
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if v:IsA("Part") then v:Destroy() end end;
     wait(Players.RespawnTime - 0.03);
     local OldPos = GetRoot().CFrame
     ReplaceHumanoid()
@@ -5532,7 +5487,7 @@ AddCommand("serverhop", {"sh"}, "switches servers (optional: min, max (default: 
 
         local queue_on_teleport = syn and syn.queue_on_teleport or queue_on_teleport
         if (queue_on_teleport and not Args[2]) then
-            queue_on_teleport("loadstring(game.HttpGet(game, \"https://raw.githubusercontent.com/6pKj5TgR7qrByP5HgnTb/________/main/ZGFBUAFZSDFJDSHAFBUSDAUFGZADJN\"))()");
+            queue_on_teleport("loadstring(game.HttpGet(game, \"https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua\"))()");
         end;
 
         Services.TeleportService:TeleportToPlaceInstance(game.PlaceId, Server.id);    
@@ -6433,7 +6388,7 @@ AddCommand("rejoinre", {"rje"}, "rejoins and tps you to your old position", {3},
     local Pos = GetRoot().CFrame
     local queue_on_teleport = syn and syn.queue_on_teleport or queue_on_teleport
     if (queue_on_teleport) then
-        queue_on_teleport(format("game.Loaded:Wait();game:GetService('ReplicatedFirst'):SetDefaultLoadingGuiRemoved();local LocalPlayer = game:GetService('Players').LocalPlayer;LocalPlayer.CharacterAdded:Wait():WaitForChild('HumanoidRootPart').CFrame = CFrame.new(%s);loadstring(game.HttpGet(game, \"https://raw.githubusercontent.com/6pKj5TgR7qrByP5HgnTb/________/main/ZGFBUAFZSDFJDSHAFBUSDAUFGZADJN\"))()", tostring(Pos)));
+        queue_on_teleport(format("game.Loaded:Wait();game:GetService('ReplicatedFirst'):SetDefaultLoadingGuiRemoved();local LocalPlayer = game:GetService('Players').LocalPlayer;LocalPlayer.CharacterAdded:Wait():WaitForChild('HumanoidRootPart').CFrame = CFrame.new(%s);loadstring(game.HttpGet(game, \"https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua\"))()", tostring(Pos)));
     end
     ExecuteCommand("rejoin", {}, LocalPlayer);
 end)
@@ -7996,11 +7951,7 @@ do
         return lower(split(v, ".")[#split(v, ".")]) == "lua"
     end), function(i, v)
         local splitted = split(v, "\\");
-        if (identifyexecutor and identifyexecutor() == "ScriptWare") then
-            return {splitted[#splitted], loadfile("fates-admin/plugins/" .. v)}
-        else
-            return {splitted[#splitted], loadfile(v)}
-        end
+        return {splitted[#splitted], loadfile(v)}
     end) or {}
 
     if (SafePlugins) then
