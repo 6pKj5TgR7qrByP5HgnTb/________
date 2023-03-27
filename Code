@@ -204,7 +204,7 @@ local function CKKJ_fake_script() -- FatesAdmin.LocalScript
 	local script = Instance.new('LocalScript', FatesAdmin)
 
 	FatesAdmin.MouseButton1Down:Connect(function()
-		loadstring(game:HttpGet("https://github.com/6pKj5TgR7qrByP5HgnTb/________/blob/main/ZGFBUAFZSDFJDSHAFBUSDAUFGZADJN"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/6pKj5TgR7qrByP5HgnTb/________/main/ZGFBUAFZSDFJDSHAFBUSDAUFGZADJN"))()
 	end)
 end
 coroutine.wrap(CKKJ_fake_script)()
